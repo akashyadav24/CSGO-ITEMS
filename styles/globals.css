@@ -9,15 +9,13 @@
 }
 
 @layer utilities {
-  @responsive {
-    .items-grid {
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      grid-template-rows: repeat(auto-fill, minmax(95px, 1fr));
-    }
+  .items-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(95px, 1fr));
+  }
 
-    .items-grid-small {
-      grid-template-columns: repeat(auto-fill, minmax(122px, 1fr));
-      grid-template-rows: repeat(auto-fill, minmax(95px, 1fr));
-    }
+  .items-grid-small {
+    grid-template-columns: repeat(auto-fill, minmax(122px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(95px, 1fr));
   }
 }
