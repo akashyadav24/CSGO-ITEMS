@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import ResponsiveNavbar from "./ResponsiveNavbar";
 
 const navigation = [
   { name: "Skins", href: "/skins" },
@@ -19,9 +21,21 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const router = useRouter();
+  const [showNavbar, setShowNavbar] = useState(false);
+  useEffect(() => {
+    if (showNavbar) {
+      document.body.classList.add("overflow-hidden");
+      return;
+    }
+
+    document.body.classList.remove("overflow-hidden");
+  }, [showNavbar]);
 
   return (
     <>
+      {showNavbar && (
+        <ResponsiveNavbar navigation={navigation} closeNavbar={setShowNavbar} />
+      )}
       <div className="sticky top-0 z-40 flex-none w-full transition-colors duration-500 bg-white backdrop-blur lg:z-50 lg:border-b lg:border-stone-900/10 bg-stone-50/90 ">
         <div className="mx-auto max-w-7xl">
           <div className="px-4 py-3 border-b border-stone-900/10 lg:px-8 lg:border-0">
@@ -58,9 +72,7 @@ export default function Navbar() {
                   </ul>
                 </nav>
               </div>
-
               <button className="flex items-center justify-center w-8 h-8 ml-auto -my-1 text-slate-500 hover:text-slate-600 lg:hidden">
-                <span className="sr-only">Search</span>
                 <svg
                   width="24"
                   height="24"
@@ -76,7 +88,10 @@ export default function Navbar() {
                 </svg>
               </button>
               <div className="ml-2 -my-1 lg:hidden">
-                <button className="flex items-center justify-center w-8 h-8 text-slate-500 hover:text-slate-600">
+                <button
+                  className="flex items-center justify-center w-8 h-8 text-slate-500 hover:text-slate-600"
+                  onClick={() => setShowNavbar(true)}
+                >
                   <svg width="24" height="24">
                     <path
                       d="M5 6h14M5 12h14M5 18h14"
