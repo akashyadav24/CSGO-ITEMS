@@ -100,3 +100,15 @@ export const getCollectibles = async (type = undefined) => {
 export const getAgents = async () => {
   return await axios.get(`${BASE_URL}/agents.json`);
 };
+
+export const getGraffiti = async () => {
+  return await axios.get(`${BASE_URL}/graffiti.json`);
+};
+
+export const getKeys = async () => {
+  return await axios.get(`${BASE_URL}/keys.json`);
+};
+
+export const getPatches = async () => {
+  return await axios.get(`${BASE_URL}/patches.json`);
+};
