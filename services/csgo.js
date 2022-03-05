@@ -36,3 +36,7 @@ export const getCrates = async (type = undefined) => {
 export const getStickers = async () => {
   return await axios.get(`${BASE_URL}/stickers.json`);
 };
+
+export const getCollections = async () => {
+  return await axios.get(`${BASE_URL}/collections.json`);
+};
