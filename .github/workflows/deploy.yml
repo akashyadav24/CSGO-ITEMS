@@ -21,6 +21,8 @@ jobs:
 
       - name: Build my App
         run: npm run build && npm run export && touch ./out/.nojekyll
+        env:
+          ON_GITHUB_PAGES: true
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
