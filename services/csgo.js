@@ -32,3 +32,7 @@ export const getCrates = async (type = undefined) => {
 
   return capsules;
 };
+
+export const getStickers = async () => {
+  return await axios.get(`${BASE_URL}/stickers.json`);
+};
