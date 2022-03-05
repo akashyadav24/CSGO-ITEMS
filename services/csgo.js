@@ -96,3 +96,7 @@ export const getCollectibles = async (type = undefined) => {
     return operation;
   }
 };
+
+export const getAgents = async () => {
+  return await axios.get(`${BASE_URL}/agents.json`);
+};
