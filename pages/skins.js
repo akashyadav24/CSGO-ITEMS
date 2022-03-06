@@ -7,6 +7,7 @@ import { getSkins } from "../services/csgo";
 export default function Skins() {
   const [loading, setLoading] = useState(false);
   const [skins, setSkins] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -15,6 +16,7 @@ export default function Skins() {
 
         const { data } = await getSkins();
 
+        setShowedItems(data.splice(0, 20));
         setSkins(data);
         setLoading(false);
       } catch (e) {
@@ -24,6 +26,34 @@ export default function Skins() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastUserLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastUserLoaded) {
+      const lastUserLoadedOffset =
+        lastUserLoaded.offsetTop + lastUserLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastUserLoadedOffset) {
+        if (skins.length) {
+          const all = skins;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setSkins(all);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -33,7 +63,7 @@ export default function Skins() {
       </Head>
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {skins.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}
