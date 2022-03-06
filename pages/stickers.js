@@ -7,6 +7,7 @@ import { getStickers } from "../services/csgo";
 export default function Strikers() {
   const [loading, setLoading] = useState(false);
   const [stickers, setStickers] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -15,6 +16,7 @@ export default function Strikers() {
 
         const { data } = await getStickers();
 
+        setShowedItems(data.splice(0, 20));
         setStickers(data);
         setLoading(false);
       } catch (e) {
@@ -24,6 +26,34 @@ export default function Strikers() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastUserLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastUserLoaded) {
+      const lastUserLoadedOffset =
+        lastUserLoaded.offsetTop + lastUserLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastUserLoadedOffset) {
+        if (stickers.length) {
+          const all = stickers;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setStickers(all);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -33,7 +63,7 @@ export default function Strikers() {
       </Head>
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {stickers.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}
