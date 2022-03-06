@@ -19,14 +19,8 @@ jobs:
       - name: Installing my packages
         run: npm ci
 
-      - name: Run a build
-        run: npm run build
-
-      - name: Run a server
-        run: npm run start
-
       - name: Build my App
-        run: npm run export && touch ./out/.nojekyll
+        run: npm run build && npm run export && touch ./out/.nojekyll
         env:
           ON_GITHUB_PAGES: true
 

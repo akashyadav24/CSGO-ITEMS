@@ -35,15 +35,15 @@ export default function Strikers() {
   });
 
   const handleScroll = () => {
-    const lastUserLoaded = document.querySelector(
+    const lastItemLoaded = document.querySelector(
       ".items-grid > .group:last-child"
     );
-    if (lastUserLoaded) {
-      const lastUserLoadedOffset =
-        lastUserLoaded.offsetTop + lastUserLoaded.clientHeight;
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
       const pageOffset = window.pageYOffset + window.innerHeight;
 
-      if (pageOffset > lastUserLoadedOffset) {
+      if (pageOffset > lastItemLoadedOffset) {
         if (stickers.length) {
           const all = stickers;
           const selected = all.splice(0, 20);
