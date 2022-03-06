@@ -25,7 +25,7 @@ export default function CratesNavbar() {
           <a
             className={classNames(
               router.asPath === item.href
-                ? "text-indigo-500 border-indigo-500"
+                ? "text-indigo-400 border-indigo-400"
                 : "text-stone-500 border-transparent",
               "block px-4 py-3 -mb-px border-b hover:border-indigo-500 hover:text-indigo-500 duration-100"
             )}
