@@ -20,6 +20,7 @@ jobs:
         run: npm ci
 
       - name: Build my App
+        run: npm run start
         run: npm run build && npm run export && touch ./out/.nojekyll
         env:
           ON_GITHUB_PAGES: true
