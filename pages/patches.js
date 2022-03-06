@@ -32,13 +32,14 @@ export default function Patches() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SpinnerLoader loading={loading} />
-      <div className="grid w-full gap-1 py-10 mx-auto items-grid-small md:items-grid">
+      <div className="items-grid">
         {patches.map((item) => {
           return (
             <ItemCard
               key={item.id}
               name={item.name}
               image={item.image}
+              rarity={item.rarity}
             ></ItemCard>
           );
         })}

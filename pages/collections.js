@@ -32,7 +32,7 @@ export default function Collections() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SpinnerLoader loading={loading} />
-      <div className="grid w-full gap-1 py-10 mx-auto items-grid-small md:items-grid">
+      <div className="items-grid">
         {collections.map((item) => {
           return (
             <ItemCard

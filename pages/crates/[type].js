@@ -46,7 +46,7 @@ export default function CratesByType() {
       </Head>
       <CratesNavbar />
       <SpinnerLoader loading={loading} />
-      <div className="grid w-full gap-1 py-10 mx-auto items-grid-small md:items-grid">
+      <div className="items-grid">
         {crates.map((item) => {
           return (
             <ItemCard
