@@ -25,10 +25,12 @@ export default function Navbar() {
   useEffect(() => {
     if (showNavbar) {
       document.body.classList.add("overflow-hidden");
+      document.body.classList.add("lg:overflow-auto");
       return;
     }
 
     document.body.classList.remove("overflow-hidden");
+    document.body.classList.remove("lg:overflow-auto");
   }, [showNavbar]);
 
   return (
