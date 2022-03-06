@@ -19,8 +19,10 @@ jobs:
       - name: Installing my packages
         run: npm ci
 
-      - name: Build my App
+      - name: Run a server
         run: npm run start
+
+      - name: Build my App
         run: npm run build && npm run export && touch ./out/.nojekyll
         env:
           ON_GITHUB_PAGES: true
