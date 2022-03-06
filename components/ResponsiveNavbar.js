@@ -21,6 +21,7 @@ export default function ResponsiveNavbar({ navigation, closeNavbar }) {
       ></div>
       <div className="relative bg-white w-80 max-w-[calc(100%-3rem)] p-6">
         <button
+          type="button"
           className="absolute z-10 flex items-center justify-center w-8 h-8 top-5 right-5 text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
           onClick={() => closeNavbar(false)}
         >

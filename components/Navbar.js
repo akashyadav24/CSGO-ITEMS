@@ -74,7 +74,10 @@ export default function Navbar() {
                   </ul>
                 </nav>
               </div>
-              <button className="flex items-center justify-center w-8 h-8 ml-auto -my-1 text-slate-500 hover:text-slate-600 lg:hidden">
+              <button
+                type="button"
+                className="flex items-center justify-center w-8 h-8 ml-auto -my-1 text-slate-500 hover:text-slate-600 lg:hidden"
+              >
                 <svg
                   width="24"
                   height="24"
@@ -91,6 +94,7 @@ export default function Navbar() {
               </button>
               <div className="ml-2 -my-1 lg:hidden">
                 <button
+                  type="button"
                   className="flex items-center justify-center w-8 h-8 text-slate-500 hover:text-slate-600"
                   onClick={() => setShowNavbar(true)}
                 >
