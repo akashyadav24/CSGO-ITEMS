@@ -9,6 +9,8 @@ const nextConfig = {
   basePath,
   reactStrictMode: true,
   images: {
+    loader: 'akamai',
+    path: '/',
     domains: ["raw.githubusercontent.com"],
   },
 };
