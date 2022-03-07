@@ -44,7 +44,7 @@ export default function Navbar() {
             <div className="relative flex items-center">
               <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 <Link href="/">
-                  <a>CSGO DATA</a>
+                  <a>CSGO ITEMS</a>
                 </Link>
               </div>
               <div className="relative items-center hidden ml-auto lg:flex">
