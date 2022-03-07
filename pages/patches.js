@@ -7,6 +7,7 @@ import { getPatches } from "../services/csgo";
 export default function Patches() {
   const [loading, setLoading] = useState(false);
   const [patches, setPatches] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -15,6 +16,7 @@ export default function Patches() {
 
         const { data } = await getPatches();
 
+        setShowedItems(data.splice(0, 20));
         setPatches(data);
         setLoading(false);
       } catch (e) {
@@ -24,6 +26,34 @@ export default function Patches() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastItemLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastItemLoadedOffset) {
+        if (patches.length) {
+          const all = patches;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setPatches(all);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -33,7 +63,7 @@ export default function Patches() {
       </Head>
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {patches.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}

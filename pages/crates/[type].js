@@ -17,6 +17,7 @@ export default function CratesByType() {
 
   const [loading, setLoading] = useState(false);
   const [crates, setCrates] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -25,8 +26,9 @@ export default function CratesByType() {
 
         const { data } = await getCrates(type);
 
-        setLoading(false);
+        setShowedItems(data.splice(0, 20));
         setCrates(data);
+        setLoading(false);
       } catch (e) {
         setCrates([]);
         console.error(e);
@@ -34,6 +36,33 @@ export default function CratesByType() {
     }
     getData();
   }, [type]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastItemLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastItemLoadedOffset) {
+        if (crates.length) {
+          const all = crates;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setCrates(all);
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -47,7 +76,7 @@ export default function CratesByType() {
       <CratesNavbar />
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {crates.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}

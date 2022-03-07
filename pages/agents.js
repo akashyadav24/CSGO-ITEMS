@@ -7,6 +7,7 @@ import { getAgents } from "../services/csgo";
 export default function Agents() {
   const [loading, setLoading] = useState(false);
   const [agents, setAgents] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -15,6 +16,7 @@ export default function Agents() {
 
         const { data } = await getAgents();
 
+        setShowedItems(data.splice(0, 20));
         setAgents(data);
         setLoading(false);
       } catch (e) {
@@ -24,6 +26,34 @@ export default function Agents() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastItemLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastItemLoadedOffset) {
+        if (agents.length) {
+          const all = agents;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setAgents(all);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -33,7 +63,7 @@ export default function Agents() {
       </Head>
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {agents.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}

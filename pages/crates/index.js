@@ -8,6 +8,7 @@ import { getCrates } from "../../services/csgo";
 export default function Crates() {
   const [loading, setLoading] = useState(false);
   const [crates, setCrates] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -16,8 +17,9 @@ export default function Crates() {
 
         const { data } = await getCrates();
 
-        setLoading(false);
+        setShowedItems(data.splice(0, 20));
         setCrates(data);
+        setLoading(false);
       } catch (e) {
         setCrates([]);
         console.error(e);
@@ -25,6 +27,33 @@ export default function Crates() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastItemLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastItemLoadedOffset) {
+        if (crates.length) {
+          const all = crates;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setCrates(all);
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -36,7 +65,7 @@ export default function Crates() {
       <CratesNavbar />
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {crates.map((item) => (
+        {showedItems.map((item) => (
           <ItemCard
             key={item.id}
             name={item.name}

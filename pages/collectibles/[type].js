@@ -17,6 +17,7 @@ export default function CollectiblesByType() {
 
   const [loading, setLoading] = useState(false);
   const [collectibles, setCollectibles] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -25,6 +26,7 @@ export default function CollectiblesByType() {
 
         const { data } = await getCollectibles(type);
 
+        setShowedItems(data.splice(0, 20));
         setCollectibles(data);
         setLoading(false);
       } catch (e) {
@@ -34,6 +36,33 @@ export default function CollectiblesByType() {
     }
     getData();
   }, [type]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastItemLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastItemLoadedOffset) {
+        if (collectibles.length) {
+          const all = collectibles;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setCollectibles(all);
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -47,7 +76,7 @@ export default function CollectiblesByType() {
       <CollectiblesNavbar />
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {collectibles.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}

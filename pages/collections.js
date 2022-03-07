@@ -7,6 +7,7 @@ import { getCollections } from "../services/csgo";
 export default function Collections() {
   const [loading, setLoading] = useState(false);
   const [collections, setCollections] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -15,6 +16,7 @@ export default function Collections() {
 
         const { data } = await getCollections();
 
+        setShowedItems(data.splice(0, 20));
         setCollections(data);
         setLoading(false);
       } catch (e) {
@@ -24,6 +26,34 @@ export default function Collections() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastItemLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastItemLoadedOffset) {
+        if (collections.length) {
+          const all = collections;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setCollections(all);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -33,7 +63,7 @@ export default function Collections() {
       </Head>
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {collections.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}

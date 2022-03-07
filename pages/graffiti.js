@@ -7,6 +7,7 @@ import { getGraffiti } from "../services/csgo";
 export default function Graffiti() {
   const [loading, setLoading] = useState(false);
   const [graffiti, setGraffiti] = useState([]);
+  const [showedItems, setShowedItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -15,6 +16,7 @@ export default function Graffiti() {
 
         const { data } = await getGraffiti();
 
+        setShowedItems(data.splice(0, 20));
         setGraffiti(data);
         setLoading(false);
       } catch (e) {
@@ -24,6 +26,34 @@ export default function Graffiti() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = () => {
+    const lastItemLoaded = document.querySelector(
+      ".items-grid > .group:last-child"
+    );
+    if (lastItemLoaded) {
+      const lastItemLoadedOffset =
+        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > lastItemLoadedOffset) {
+        if (graffiti.length) {
+          const all = graffiti;
+          const selected = all.splice(0, 20);
+          setShowedItems([...showedItems, ...selected]);
+          setGraffiti(all);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -33,7 +63,7 @@ export default function Graffiti() {
       </Head>
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
-        {graffiti.map((item) => {
+        {showedItems.map((item) => {
           return (
             <ItemCard
               key={item.id}
