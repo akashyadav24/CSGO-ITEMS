@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function ItemCard({ name, image, rarity = "" }) {
   return (
@@ -8,17 +8,12 @@ export default function ItemCard({ name, image, rarity = "" }) {
           "flex items-center justify-center w-full overflow-hidden bg-gray-200 rounded-md min-h-[20rem] group-hover:opacity-75 lg:h-80"
         }
       >
-        {/* <div className="px-8">
-          <img
-            src={image}
-            alt={name}
-            loading="lazy"
-            decode="async"
-          />
-        </div> */}
-        <div className="relative w-full pb-48">
-          <Image src={image} alt={name} layout="fill" objectFit="contain" />
+        <div className="px-8">
+          <img src={image} alt={name} loading="lazy" decode="async" />
         </div>
+        {/* <div className="relative w-full pb-48">
+          <Image src={image} alt={name} layout="fill" objectFit="contain" />
+        </div> */}
       </div>
       <div className="flex justify-between mt-4">
         <div>
