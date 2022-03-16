@@ -15,7 +15,9 @@ export default function Crates() {
       try {
         setLoading(true);
 
-        const { data } = await getCrates();
+        const data = await getCrates().then((response) => {
+          return response.data.sort((a, b) => a.type?.localeCompare(b.type));
+        });
 
         setShowedItems(data.splice(0, 20));
         setCrates(data);

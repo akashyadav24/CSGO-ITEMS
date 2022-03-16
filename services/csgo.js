@@ -52,25 +52,25 @@ export const getCollectibles = async (type = undefined) => {
     const major = { data: [] };
 
     await axios
-      .get(`${BASE_URL}/collectibles/major/fantasy_trophies.json`)
-      .then((response) => {
-        major.data.push(...response.data);
-      });
-
-    await axios
       .get(`${BASE_URL}/collectibles/major/finalists_trophies.json`)
       .then((response) => {
         major.data.push(...response.data);
       });
 
     await axios
-      .get(`${BASE_URL}/collectibles/major/pickem_coins.json`)
+      .get(`${BASE_URL}/collectibles/major/pickem_old.json`)
       .then((response) => {
         major.data.push(...response.data);
       });
 
     await axios
-      .get(`${BASE_URL}/collectibles/major/pickem_old.json`)
+      .get(`${BASE_URL}/collectibles/major/fantasy_trophies.json`)
+      .then((response) => {
+        major.data.push(...response.data);
+      });
+
+    await axios
+      .get(`${BASE_URL}/collectibles/major/pickem_coins.json`)
       .then((response) => {
         major.data.push(...response.data);
       });
@@ -111,4 +111,8 @@ export const getKeys = async () => {
 
 export const getPatches = async () => {
   return await axios.get(`${BASE_URL}/patches.json`);
+};
+
+export const getMusicKits = async () => {
+  return await axios.get(`${BASE_URL}/music_kits.json`);
 };
