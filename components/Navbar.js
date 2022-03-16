@@ -13,6 +13,7 @@ const navigation = [
   { name: "Graffiti", href: "/graffiti" },
   { name: "Keys", href: "/keys" },
   { name: "Patches", href: "/patches" },
+  { name: "Music", href: "/music-kits" },
 ];
 
 function classNames(...classes) {
@@ -49,7 +50,7 @@ export default function Navbar() {
               </div>
               <div className="relative items-center hidden ml-auto lg:flex">
                 <nav className="text-sm font-semibold leading-6 text-stone-700">
-                  <ul className="flex space-x-8">
+                  <ul className="flex space-x-6 xl:space-x-8">
                     {navigation.map((item) => (
                       <li key={item.name}>
                         <Link href={item.href}>
