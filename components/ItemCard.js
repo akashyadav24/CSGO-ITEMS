@@ -1,4 +1,5 @@
 // import Image from "next/image";
+import Link from "next/link";
 
 export default function ItemCard({ route, name, image, rarity = "" }) {
   return (
@@ -18,10 +19,12 @@ export default function ItemCard({ route, name, image, rarity = "" }) {
       <div className="flex justify-between mt-4">
         <div>
           <h3 className="text-sm text-gray-700">
-            <a href={`/item/${route?.type}/${route?.id}`}>
-              <span aria-hidden="true" className="absolute inset-0" />
-              {name}
-            </a>
+            <Link href={`/item/${route?.type}/${route?.id}`}>
+              <a>
+                <span aria-hidden="true" className="absolute inset-0" />
+                {name}
+              </a>
+            </Link>
           </h3>
           <p className="mt-1 text-sm text-gray-500">{rarity}</p>
         </div>
