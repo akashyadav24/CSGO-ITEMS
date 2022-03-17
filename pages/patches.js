@@ -67,6 +67,7 @@ export default function Patches() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "patches", id: item.id }}
               name={item.name}
               image={item.image}
               rarity={item.rarity}

@@ -70,6 +70,7 @@ export default function Crates() {
         {showedItems.map((item) => (
           <ItemCard
             key={item.id}
+            route={{ type: "crates", id: item.id }}
             name={item.name}
             image={item.image}
           ></ItemCard>

@@ -1,6 +1,6 @@
 // import Image from "next/image";
 
-export default function ItemCard({ name, image, rarity = "" }) {
+export default function ItemCard({ route, name, image, rarity = "" }) {
   return (
     <div className="relative group">
       <div
@@ -18,10 +18,10 @@ export default function ItemCard({ name, image, rarity = "" }) {
       <div className="flex justify-between mt-4">
         <div>
           <h3 className="text-sm text-gray-700">
-            {/* <a href="#"> */}
-            <span aria-hidden="true" className="absolute inset-0" />
-            {name}
-            {/* </a> */}
+            <a href={`/item/${route?.type}/${route?.id}`}>
+              <span aria-hidden="true" className="absolute inset-0" />
+              {name}
+            </a>
           </h3>
           <p className="mt-1 text-sm text-gray-500">{rarity}</p>
         </div>

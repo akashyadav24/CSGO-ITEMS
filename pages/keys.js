@@ -67,6 +67,7 @@ export default function Keys() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "keys", id: item.id }}
               name={item.name}
               image={item.image}
             ></ItemCard>

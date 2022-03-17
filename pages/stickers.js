@@ -67,6 +67,7 @@ export default function Strikers() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "stickers", id: item.id }}
               name={item.name}
               image={item.image}
               rarity={item.rarity}

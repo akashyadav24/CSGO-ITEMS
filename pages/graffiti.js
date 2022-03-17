@@ -67,6 +67,7 @@ export default function Graffiti() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "graffiti", id: item.id }}
               name={item.name}
               image={item.image}
               rarity={item.rarity}

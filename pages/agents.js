@@ -67,6 +67,7 @@ export default function Agents() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "agents", id: item.id }}
               name={item.name}
               image={item.image}
               rarity={item.rarity}

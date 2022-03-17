@@ -80,6 +80,7 @@ export default function CollectiblesByType() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "collectibles", id: item.id }}
               name={item.name}
               image={item.image}
               rarity={item.rarity}

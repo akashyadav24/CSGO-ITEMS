@@ -24,7 +24,6 @@ export default function Home() {
               CSGO API
             </a>
           </Link>
-          .
         </p>
       </div>
     </>

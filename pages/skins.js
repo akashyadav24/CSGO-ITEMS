@@ -67,6 +67,7 @@ export default function Skins() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "skins", id: item.id }}
               name={item.name}
               image={item.image}
               rarity={item.rarity}

@@ -67,6 +67,7 @@ export default function MusicKits() {
           return (
             <ItemCard
               key={item.id}
+              route={{ type: "music-kits", id: item.id }}
               name={item.name}
               rarity={item.rarity}
               image={item.image}
