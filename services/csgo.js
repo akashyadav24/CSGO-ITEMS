@@ -116,3 +116,7 @@ export const getPatches = async () => {
 export const getMusicKits = async () => {
   return await axios.get(`${BASE_URL}/music_kits.json`);
 };
+
+export const getAllItems = async () => {
+  return await axios.get(`${BASE_URL}/all.json`);
+};

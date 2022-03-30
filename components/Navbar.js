@@ -20,9 +20,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({ openPalette, togglePalette }) {
   const router = useRouter();
   const [showNavbar, setShowNavbar] = useState(false);
+
   useEffect(() => {
     if (showNavbar) {
       document.body.classList.add("overflow-hidden");
@@ -48,6 +49,44 @@ export default function Navbar() {
                   <a>CSGO ITEMS</a>
                 </Link>
               </div>
+
+              <div className="relative ml-auto pointer-events-auto">
+                <button
+                  type="button"
+                  className="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300"
+                  onClick={() => togglePalette(true)}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    aria-hidden="true"
+                    className="flex-none mr-3"
+                  >
+                    <path
+                      d="m19 19-3.5-3.5"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                    <circle
+                      cx="11"
+                      cy="11"
+                      r="6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></circle>
+                  </svg>
+                  Search...
+                  <span className="flex-none pl-3 ml-auto text-xs font-semibold">
+                    Ctrl K
+                  </span>
+                </button>
+              </div>
+
               <div className="relative items-center hidden ml-auto lg:flex">
                 <nav className="text-sm font-semibold leading-6 text-stone-700">
                   <ul className="flex space-x-6 xl:space-x-8">
@@ -78,6 +117,7 @@ export default function Navbar() {
               <button
                 type="button"
                 className="flex items-center justify-center w-8 h-8 ml-auto -my-1 text-slate-500 hover:text-slate-600 lg:hidden"
+                onClick={() => togglePalette(true)}
               >
                 <svg
                   width="24"
