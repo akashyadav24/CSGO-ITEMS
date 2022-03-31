@@ -101,12 +101,14 @@ export default function CommandPalette({ openPalette, togglePalette }) {
               onClick={() => togglePalette(false)}
             ></div>
 
-            <span
+            {/* <span
               className="hidden md:inline-block md:align-middle md:h-screen"
               aria-hidden="true"
             >
               &#8203;
-            </span>
+            </span> */}
+
+            <span className="block py-10"></span>
 
             <div
               className="inline-block w-full m-6 text-base text-left transition transform h-min md:m-0 md:max-w-2xl md:px-4 md:my-8 md:align-middle lg:max-w-4xl"
@@ -127,7 +129,16 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                     onChange={(e) => setSearch(e.target.value)}
                   ></input>
                 </div>
-                <div className="px-2 py-2 space-y-1 overflow-y-auto h-96 hide-scrollbar">
+                <div className="px-2 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-20rem)] hide-scrollbar">
+                  {search === "" && (
+                    <div className="py-3 text-center"> No recent searches</div>
+                  )}
+                  {search && filteredItems.length === 0 && (
+                    <div className="py-3 text-center">
+                      {" "}
+                      No results for &quot;{search}&quot;
+                    </div>
+                  )}
                   {filteredItems.map((item) => (
                     <div
                       key={item.id}
