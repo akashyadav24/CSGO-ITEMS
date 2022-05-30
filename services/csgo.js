@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://bymykel.me/CSGO-API/api";
+const BASE_URL = "https://bymykel.github.io/CSGO-API/api";
 
 export const getSkins = async () => {
   return await axios.get(`${BASE_URL}/skins.json`);
