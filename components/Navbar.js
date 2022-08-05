@@ -53,7 +53,7 @@ export default function Navbar({ openPalette, togglePalette }) {
               <div className="relative ml-auto pointer-events-auto">
                 <button
                   type="button"
-                  className="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300"
+                  className="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-5 hover:ring-slate-300"
                   onClick={() => togglePalette(true)}
                 >
                   <svg
@@ -80,10 +80,7 @@ export default function Navbar({ openPalette, togglePalette }) {
                       strokeLinejoin="round"
                     ></circle>
                   </svg>
-                  Search...
-                  <span className="flex-none pl-3 ml-auto text-xs font-semibold">
-                    Ctrl K
-                  </span>
+                  Search
                 </button>
               </div>
 

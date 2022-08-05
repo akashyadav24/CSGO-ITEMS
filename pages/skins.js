@@ -1,6 +1,7 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ItemCard from "../components/ItemCard";
+import ItemsFilter from "../components/ItemsFilter";
 import SpinnerLoader from "../components/SpinnerLoader";
 import { getSkins } from "../services/csgo";
 
@@ -8,6 +9,8 @@ export default function Skins() {
   const [loading, setLoading] = useState(false);
   const [skins, setSkins] = useState([]);
   const [showedItems, setShowedItems] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -16,8 +19,9 @@ export default function Skins() {
 
         const { data } = await getSkins();
 
+        setSkins([...data]);
         setShowedItems(data.splice(0, 20));
-        setSkins(data);
+        setFilteredItems(data);
         setLoading(false);
       } catch (e) {
         setSkins([]);
@@ -34,6 +38,16 @@ export default function Skins() {
     };
   });
 
+  useEffect(() => {
+    const filtered = skins.filter((item) => {
+      if (search === "") return true;
+      return item.name.toLowerCase().includes(search.toLowerCase());
+    });
+
+    setFilteredItems(filtered);
+    setShowedItems(filtered.splice(0, 20));
+  }, [search]);
+
   const handleScroll = () => {
     const lastItemLoaded = document.querySelector(
       ".items-grid > .group:last-child"
@@ -44,11 +58,11 @@ export default function Skins() {
       const pageOffset = window.pageYOffset + window.innerHeight;
 
       if (pageOffset > lastItemLoadedOffset) {
-        if (skins.length) {
-          const all = skins;
+        if (filteredItems.length) {
+          const all = filteredItems;
           const selected = all.splice(0, 20);
           setShowedItems([...showedItems, ...selected]);
-          setSkins(all);
+          setFilteredItems(all);
         }
       }
     }
@@ -62,6 +76,7 @@ export default function Skins() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SpinnerLoader loading={loading} />
+      <ItemsFilter search={search} setSearch={setSearch} />
       <div className="items-grid">
         {showedItems.map((item) => {
           return (
