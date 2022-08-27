@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getAllItems } from "../services/csgo";
+import { useRouter } from "next/router";
 
 const getType = (id) => {
   const types = {
@@ -23,9 +24,11 @@ export default function CommandPalette({ openPalette, togglePalette }) {
   const [search, setSearch] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [items, setItems] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     if (openPalette) {
+      setSearch("");
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -67,13 +70,32 @@ export default function CommandPalette({ openPalette, togglePalette }) {
   }, [search, items]);
 
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
+    function handleKeyEvent(e) {
       if (e.ctrlKey && e.key === "k") {
         e.preventDefault();
         togglePalette(true);
       }
-    });
+    }
+    document.addEventListener("keydown", handleKeyEvent);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyEvent);
+    }
   }, [togglePalette]);
+
+  useEffect(() => {
+    function handleEnterKey(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        togglePalette(false);
+        router.push("/search?q=" + search);
+      }
+    }
+    document.addEventListener("keydown", handleEnterKey);
+    return () => {
+      document.removeEventListener("keydown", handleEnterKey);
+    };
+  }, [togglePalette, search]);
 
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
@@ -120,7 +142,9 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                 <div className="p-2">
                   <input
                     ref={(input) => {
-                      input && input.focus();
+                      setTimeout(() => {
+                        input && input.focus();
+                      }, 100);
                     }}
                     type="text"
                     className="w-full p-2 rounded-md outline-none bg-stone-100"
