@@ -16,7 +16,7 @@ export default function Home() {
         </h1>
         <p className="mt-3 text-base text-stone-600 sm:max-w-xl sm:mt-5 sm:text-lg md:mt-5 md:text-xl">
           Simple example of what you can do with the{" "}
-          <Link href="https://bymykel.me/CSGO-API/">
+          <Link href="https://bymykel.github.io/CSGO-API/">
             <a
               className="text-indigo-400 duration-100 hover:text-indigo-500"
               target="_blank"
