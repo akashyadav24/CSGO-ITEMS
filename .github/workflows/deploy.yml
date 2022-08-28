@@ -3,8 +3,6 @@ name: GitHub Pages deploy
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: "0 15 * * *"
 
 jobs:
   build:
