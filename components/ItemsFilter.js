@@ -56,9 +56,6 @@ export default function ItemsFilter({ filter, filterOptions, search, setSearch }
           </svg>
         </div>
         <input
-          ref={(input) => {
-            input && input.focus();
-          }}
           type="text"
           className={classNames(
             filter ? "border-r-0 rounded-r-none" : "",
