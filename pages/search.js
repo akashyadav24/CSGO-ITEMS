@@ -68,9 +68,21 @@ export default function Skins() {
   }, [q]);
 
   useEffect(() => {
+    if (search === "") {
+      setFilteredItems([]);
+      setShowedItems([]);
+      return;
+    }
+
+    const words = search.split(" ");
+
     const filtered = skins.filter((item) => {
-      if (search === "") return true;
-      return item.name.toLowerCase().includes(search.toLowerCase());
+      const { name } = item;
+      const nameMatch = words.every((word) =>
+        name.toLowerCase().includes(word.toLowerCase())
+      );
+      
+      return nameMatch;
     });
 
     setFilteredItems(filtered);

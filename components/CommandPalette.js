@@ -153,7 +153,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                     onChange={(e) => setSearch(e.target.value)}
                   ></input>
                 </div>
-                <div className="px-2 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-20rem)] hide-scrollbar">
+                <div className="px-2 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-16rem)] md:max-h-[calc(100vh-20rem)] hide-scrollbar">
                   {search === "" && (
                     <div className="py-3 text-center"> No recent searches</div>
                   )}
