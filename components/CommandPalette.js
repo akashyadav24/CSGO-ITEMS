@@ -26,6 +26,11 @@ export default function CommandPalette({ openPalette, togglePalette }) {
   const [items, setItems] = useState([]);
   const router = useRouter();
 
+  function handleButtonSearch() {
+    togglePalette(false);
+    router.push("/search?q=" + search);
+  }
+
   useEffect(() => {
     if (openPalette) {
       setSearch("");
@@ -80,12 +85,17 @@ export default function CommandPalette({ openPalette, togglePalette }) {
 
     return () => {
       document.removeEventListener("keydown", handleKeyEvent);
-    }
+    };
   }, [togglePalette]);
 
   useEffect(() => {
     function handleEnterKey(e) {
       if (e.key === "Enter") {
+        e.preventDefault();
+        togglePalette(false);
+        router.push("/search?q=" + search);
+      }
+      if (e.key === 13) {
         e.preventDefault();
         togglePalette(false);
         router.push("/search?q=" + search);
@@ -139,7 +149,37 @@ export default function CommandPalette({ openPalette, togglePalette }) {
               }}
             >
               <div className="relative w-full overflow-hidden bg-white rounded-md shadow-2xl">
-                <div className="p-2">
+                <div className="relative p-2">
+                  <button
+                    type="button"
+                    className="absolute text-gray-400 top-[15px] left-3"
+                    onClick={() => handleButtonSearch()}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      fill="none"
+                      aria-hidden="true"
+                      className="flex-none mr-3"
+                    >
+                      <path
+                        d="m19 19-3.5-3.5"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>
+                      <circle
+                        cx="11"
+                        cy="11"
+                        r="6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></circle>
+                    </svg>
+                  </button>
                   <input
                     ref={(input) => {
                       setTimeout(() => {
@@ -147,7 +187,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                       }, 100);
                     }}
                     type="text"
-                    className="w-full p-2 rounded-md outline-none bg-stone-100"
+                    className="w-full p-2 rounded-md outline-none pl-9 bg-stone-100"
                     placeholder="Search..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
