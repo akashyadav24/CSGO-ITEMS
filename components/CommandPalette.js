@@ -20,6 +20,10 @@ const getType = (id) => {
   return types[id.split("-").slice(0, -1).join("-")];
 };
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 export default function CommandPalette({ openPalette, togglePalette }) {
   const [search, setSearch] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
@@ -69,7 +73,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
         );
         return nameMatch;
       })
-      .slice(0, 50);
+      .slice(0, 5);
 
     setFilteredItems(filteredItems);
   }, [search, items]);
@@ -187,16 +191,18 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                       }, 100);
                     }}
                     type="text"
-                    className="w-full p-2 rounded-md outline-none pl-9 bg-stone-100"
+                    className="w-full p-2 bg-gray-100 rounded-md outline-none pl-9"
                     placeholder="Search..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   ></input>
                 </div>
-                <div className="px-2 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-16rem)] md:max-h-[calc(100vh-20rem)] hide-scrollbar">
-                  {search === "" && (
-                    <div className="py-3 text-center"> No recent searches</div>
+                <div
+                  className={classNames(
+                    search.length === 0 ? "hidden" : "",
+                    "px-2 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-16rem)] md:max-h-[calc(100vh-20rem)] hide-scrollbar"
                   )}
+                >
                   {search && filteredItems.length === 0 && (
                     <div className="py-3 text-center">
                       {" "}
@@ -206,7 +212,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                   {filteredItems.map((item) => (
                     <div
                       key={item.id}
-                      className="w-full rounded-md hover:bg-stone-200"
+                      className="w-full rounded-md hover:bg-gray-50"
                     >
                       <Link
                         href="/item/[type]/[id]"
