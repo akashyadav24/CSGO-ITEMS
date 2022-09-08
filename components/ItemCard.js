@@ -33,7 +33,7 @@ export default function ItemCard({ route, name, image, rarity = "", showTag = fa
           <div
             className={classNames(
               getItemColor(route.type),
-              "absolute top-0 left-0 p-0.5 px-2 m-1 text-xs bg-red-300 text-gray-900 rounded-full"
+              "absolute top-0 left-0 p-0.5 px-2 m-1 text-xs text-gray-900 rounded-full"
             )}
           >
             {route.type}
