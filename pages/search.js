@@ -127,6 +127,7 @@ export default function Skins() {
               name={item.name}
               image={item.image}
               rarity={item.rarity}
+              showTag={true}
             ></ItemCard>
           );
         })}
