@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import CratesNavbar from "../../components/CratesNavbar";
 import ItemCard from "../../components/ItemCard";
 import ItemsFilter from "../../components/ItemsFilter";
 import SpinnerLoader from "../../components/SpinnerLoader";
@@ -89,7 +88,6 @@ export default function Crates() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ItemsFilter filter={true} filterOptions={navigation} search={search} setSearch={setSearch} />
-      {/* <CratesNavbar /> */}
       <SpinnerLoader loading={loading} />
       <div className="items-grid">
         {showedItems.map((item) => (
