@@ -26,7 +26,7 @@ export default function ItemCard({ route, name, image, rarity = "", showTag = fa
     <div className="relative group">
       <div
         className={
-          "flex items-center justify-center w-full overflow-hidden bg-gray-200 rounded-md min-h-[20rem] group-hover:opacity-75 lg:h-80"
+          "flex items-center justify-center w-full overflow-hidden bg-gray-200 rounded-md min-h-[10rem] sm:min-h-[20rem] group-hover:opacity-75 lg:h-80"
         }
       >
         {showTag && (
@@ -39,7 +39,7 @@ export default function ItemCard({ route, name, image, rarity = "", showTag = fa
             {route.type}
           </div>
         )}
-        <div className="px-8">
+        <div className="px-6 sm:px-8">
           <img src={image} alt={name} loading="lazy" decode="async" />
         </div>
       </div>

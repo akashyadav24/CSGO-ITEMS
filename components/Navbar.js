@@ -44,7 +44,7 @@ export default function Navbar({ openPalette, togglePalette }) {
         <div className="mx-auto max-w-7xl">
           <div className="px-4 py-3 border-b border-stone-900/10 lg:px-8 lg:border-0">
             <div className="relative flex items-center">
-              <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+              <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
                 <Link href="/">
                   <a>CSGO ITEMS</a>
                 </Link>
