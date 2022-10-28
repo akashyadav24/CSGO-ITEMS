@@ -51,7 +51,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
 
         setItems(Object.values(data));
       } catch (e) {
-        console.error(e);
+        setItems([]);
       }
     }
     getData();
