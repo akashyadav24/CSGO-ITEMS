@@ -4,10 +4,10 @@ const BASE_URL = "https://bymykel.github.io/CSGO-API/api";
 
 export default async function handler(req, res) {
   const query = req.query;
-  const { page } = query;
+  const { page, type } = query;
 
   await axios
-    .get(`${BASE_URL}/skins.json`)
+    .get(`${BASE_URL}/${type}.json`)
     .then(({ data }) => {
       const startIndex = (page - 1) * 25;
       const endIndex = page * 25;
