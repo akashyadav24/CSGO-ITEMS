@@ -96,9 +96,9 @@ export default function Skins() {
   }, [skins, search]);
 
   const handleScroll = () => {
-    const lastItemLoaded = document.querySelector(
-      ".items-grid > .group:last-child"
-    );
+    const lastItemLoaded =
+      document.querySelector(".items-grid > .group:last-child") ||
+      document.querySelector(".items-grid-small > .group:last-child");
     if (lastItemLoaded) {
       const lastItemLoadedOffset =
         lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
@@ -126,7 +126,7 @@ export default function Skins() {
       </Head>
       <ItemsFilter filter={false} search={search} setSearch={setSearch} />
       <SpinnerLoader loading={loading} />
-      <div className="items-grid">
+      <div className="items-grid-small sm:items-grid">
         {showedItems.map((item) => {
           return (
             <ItemCard

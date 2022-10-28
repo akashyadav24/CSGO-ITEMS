@@ -41,6 +41,7 @@ export default function Skins() {
 
   useEffect(() => {
     setMounted(true);
+    setSearch("");
   }, [type]);
 
   useEffect(() => {
