@@ -39,7 +39,7 @@ export default function ItemCard({ route, name, image, rarity = "", showTag = fa
             {route.type}
           </div>
         )}
-        <div className="px-6 sm:px-8">
+        <div className="px-8">
           <img src={image} alt={name} loading="lazy" decode="async" />
         </div>
       </div>

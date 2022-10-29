@@ -5,6 +5,7 @@ function Document() {
     <Html>
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="icon" href="/favicon.jpg" />
       </Head>
       <body>
         <Main />
