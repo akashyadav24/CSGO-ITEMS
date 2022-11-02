@@ -64,7 +64,7 @@ export default function Skins() {
     if (lastItemLoaded) {
       const lastItemLoadedOffset =
         lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
-      const pageOffset = window.pageYOffset + window.innerHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight + 400;
 
       if (pageOffset > lastItemLoadedOffset && loading === false) {
         setLoading(true);
