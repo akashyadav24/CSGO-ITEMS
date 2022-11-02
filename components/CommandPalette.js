@@ -30,10 +30,16 @@ export default function CommandPalette({ openPalette, togglePalette }) {
   const [items, setItems] = useState([]);
   const router = useRouter();
 
-  function handleButtonSearch() {
+  const handleButtonSearch = () => {
     togglePalette(false);
     router.push("/search?q=" + search);
-  }
+    setSearch("");
+  };
+
+  const leavePalette = () => {
+    togglePalette(false);
+    setSearch("");
+  };
 
   useEffect(() => {
     if (openPalette) {
@@ -98,11 +104,13 @@ export default function CommandPalette({ openPalette, togglePalette }) {
         e.preventDefault();
         togglePalette(false);
         router.push("/search?q=" + search);
+        setSearch("");
       }
       if (e.key === 13) {
         e.preventDefault();
         togglePalette(false);
         router.push("/search?q=" + search);
+        setSearch("");
       }
     }
     document.addEventListener("keydown", handleEnterKey);
@@ -115,6 +123,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         togglePalette(false);
+        setSearch("");
       }
     });
   }, [togglePalette]);
@@ -134,7 +143,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
             <div
               className="fixed inset-0 block transition-opacity bg-black bg-opacity-20 backdrop-blur-sm backdrop-filter"
               aria-hidden="true"
-              onClick={() => togglePalette(false)}
+              onClick={() => leavePalette()}
             ></div>
 
             {/* <span
@@ -152,7 +161,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                 e.stopPropagation();
               }}
             >
-              <div className="relative w-full overflow-hidden bg-white rounded-md shadow-2xl">
+              <div className="relative w-full overflow-hidden bg-white rounded-md shadow-2xl dark:bg-neutral-800">
                 <div className="relative p-2">
                   <button
                     type="button"
@@ -191,7 +200,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                       }, 100);
                     }}
                     type="text"
-                    className="w-full p-2 bg-gray-100 rounded-md outline-none pl-9"
+                    className="w-full p-2 bg-gray-100 rounded-md outline-none pl-9 dark:bg-neutral-900 dark:text-stone-200"
                     placeholder="Search..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -204,42 +213,38 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                   )}
                 >
                   {search && filteredItems.length === 0 && (
-                    <div className="py-3 text-center">
+                    <div className="py-3 text-center dark:text-stone-50">
                       {" "}
                       No results for &quot;{search}&quot;
                     </div>
                   )}
                   {filteredItems.map((item) => (
-                    <div
+                    <Link
                       key={item.id}
-                      className="w-full rounded-md hover:bg-gray-50"
+                      href="/item/[type]/[id]"
+                      as={`/item/${getType(item.id)}/${item.id}`}
                     >
-                      <Link
-                        href="/item/[type]/[id]"
-                        as={`/item/${getType(item.id)}/${item.id}`}
+                      <a
+                        className="block w-full p-2 rounded-md hover:bg-gray-50 dark:hover:bg-neutral-900 focus:bg-gray-50 dark:focus:bg-neutral-900"
+                        onClick={() => leavePalette()}
                       >
-                        <a
-                          className="block p-2"
-                          onClick={() => togglePalette(false)}
-                        >
-                          <div className="flex items-center">
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-12 mr-2"
-                            />
-                            <div>
-                              <div className="text-sm font-bold">
-                                {item.name}
-                              </div>
-                              <div className="text-xs text-gray-500">
-                                {item.rarity}
-                              </div>
+                        <div className="flex items-center">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-12 mr-2"
+                          />
+                          <div>
+                            <div className="text-sm font-bold dark:text-stone-50">
+                              {item.name}
+                            </div>
+                            <div className="text-xs text-gray-500 dark:text-stone-300">
+                              {item.rarity}
                             </div>
                           </div>
-                        </a>
-                      </Link>
-                    </div>
+                        </div>
+                      </a>
+                    </Link>
                   ))}
                 </div>
               </div>

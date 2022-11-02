@@ -26,7 +26,7 @@ export default function ItemCard({ route, name, image, rarity = "", showTag = fa
     <div className="relative group">
       <div
         className={
-          "flex items-center justify-center w-full overflow-hidden bg-gray-200 rounded-md min-h-[10rem] sm:min-h-[20rem] group-hover:opacity-75 lg:h-80"
+          "flex items-center justify-center w-full overflow-hidden bg-gray-200 dark:bg-neutral-800 rounded-md min-h-[10rem] sm:min-h-[20rem] group-hover:opacity-75 lg:h-80"
         }
       >
         {showTag && (
@@ -45,7 +45,7 @@ export default function ItemCard({ route, name, image, rarity = "", showTag = fa
       </div>
       <div className="flex justify-between mt-4">
         <div>
-          <h3 className="text-sm text-gray-700">
+          <h3 className="text-sm text-gray-700 dark:text-stone-50">
             <Link href={`/item/${route?.type}/${route?.id}`}>
               <a>
                 <span aria-hidden="true" className="absolute inset-0" />
@@ -53,7 +53,7 @@ export default function ItemCard({ route, name, image, rarity = "", showTag = fa
               </a>
             </Link>
           </h3>
-          <p className="mt-1 text-sm text-gray-500">{rarity}</p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-stone-400">{rarity}</p>
         </div>
       </div>
     </div>
