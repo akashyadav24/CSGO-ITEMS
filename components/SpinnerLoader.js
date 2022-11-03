@@ -5,7 +5,7 @@ export default function SpinnerLoader({ loading }) {
         <div className="flex justify-center py-10">
           <svg
             role="status"
-            className="w-8 h-8 mr-2 text-stone-200 animate-spin fill-indigo-500"
+            className="w-8 h-8 mr-2 text-stone-200 dark:text-stone-900 animate-spin fill-indigo-500"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

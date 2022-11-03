@@ -49,7 +49,7 @@ export default function SkinById() {
         <div className="grid gap-10 mt-10 lg:grid-cols-7">
           <div
             className={
-              "flex lg:col-span-3 items-center justify-center w-full overflow-hidden bg-gray-200 rounded-md min-h-[20rem] lg:min-h-[40rem] group-hover:opacity-75 lg:h-80"
+              "flex lg:col-span-3 items-center justify-center w-full overflow-hidden bg-gray-200 dark:bg-neutral-800 rounded-md min-h-[20rem] lg:min-h-[40rem] group-hover:opacity-75 lg:h-80"
             }
           >
             <div className="px-10 lg:px-20">
@@ -63,13 +63,13 @@ export default function SkinById() {
           </div>
           <div className="w-full lg:col-span-4">
             <div className="mb-5">
-              <h1 className="text-2xl font-bold text-gray-800">{item.name}</h1>
-              <p className="mt-1 text-lg text-gray-700">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-stone-50">{item.name}</h1>
+              <p className="mt-1 text-lg text-gray-700 dark:text-stone-400">
                 {item.rarity ?? "unknown rarity"}
               </p>
             </div>
             <div>
-              <p className="mt-1 text-base text-gray-700">{item.description}</p>
+              <p className="mt-1 text-base text-gray-700 dark:text-stone-400">{item.description}</p>
             </div>
           </div>
         </div>

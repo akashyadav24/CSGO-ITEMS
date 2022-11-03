@@ -59,7 +59,7 @@ export default function ItemsFilter({ filter, filterOptions, search, setSearch }
           type="text"
           className={classNames(
             filter ? "border-r-0 rounded-r-none" : "",
-            "w-full p-2 pl-10 text-sm border rounded-md outline-none bg-stone-50 border-stone-200"
+            "w-full p-2 pl-10 text-sm border rounded-md outline-none bg-stone-50 border-stone-200 dark:bg-neutral-900 dark:border-stone-800 dark:text-stone-200"
           )}
           placeholder="Search..."
           value={search}
@@ -68,13 +68,13 @@ export default function ItemsFilter({ filter, filterOptions, search, setSearch }
         {filter && (
           <div
             ref={wrapperRef}
-            className="relative flex items-center px-4 border border-l rounded-md rounded-l-none bg-stone-100 border-stone-200"
+            className="relative flex items-center px-4 border border-l rounded-md rounded-l-none bg-stone-100 border-stone-200 dark:bg-neutral-800 dark:border-stone-800"
           >
             <button
               className="flex items-center"
               onClick={() => setDropdown(!dropdown)}
             >
-              <span className="mr-1 text-sm text-gray-700 w-max">{ filterOptions.find(item => item.href === router.asPath)?.name ?? 'Category'}</span>
+              <span className="mr-1 text-sm text-gray-700 w-max dark:text-gray-200">{ filterOptions.find(item => item.href === router.asPath)?.name ?? 'Category'}</span>
               <svg
                 className="w-5 h-5 text-gray-400"
                 fill="currentColor"
@@ -89,18 +89,18 @@ export default function ItemsFilter({ filter, filterOptions, search, setSearch }
               </svg>
             </button>
             {dropdown && (
-              <div className="absolute right-0 z-40 w-40 py-2 overflow-hidden border rounded-md shadow-lg bg-stone-50 ring-1 ring-black ring-opacity-5 top-11">
+              <div className="absolute right-0 z-40 w-40 py-2 overflow-hidden border rounded-md shadow-lg dark:border-stone-800 bg-stone-50 dark:bg-neutral-900 ring-1 ring-black ring-opacity-5 top-11">
                 <ul className="relative text-sm">
                   {filterOptions.map((item, index) => (
                     <li
                       key={index}
-                      className="text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      className="text-gray-700 dark:text-stone-200 hover:bg-gray-100 dark:hover:bg-neutral-800 hover:text-gray-900"
                     >
                       <Link href={item.href}>
                         <a
                           className={classNames(
                             router.asPath === item.href
-                              ? "bg-gray-100 text-gray-900"
+                              ? "bg-gray-100 text-gray-900 dark:bg-neutral-800 dark:text-stone-200"
                               : "",
                             "flex items-center w-full p-1.5"
                           )}

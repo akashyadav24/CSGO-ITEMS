@@ -19,7 +19,7 @@ export default function ResponsiveNavbar({ navigation, closeNavbar }) {
         className="fixed inset-0 bg-black/20 backdrop-blur-sm"
         onClick={() => closeNavbar(false)}
       ></div>
-      <div className="relative bg-white w-80 max-w-[calc(100%-3rem)] p-6">
+      <div className="relative bg-white dark:bg-neutral-900 w-80 max-w-[calc(100%-3rem)] p-6">
         <button
           type="button"
           className="absolute z-10 flex items-center justify-center w-8 h-8 top-5 right-5 text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
@@ -36,7 +36,7 @@ export default function ResponsiveNavbar({ navigation, closeNavbar }) {
           </svg>
         </button>
 
-        <nav id="nav" className="relative lg:text-sm lg:leading-6">
+        <nav id="nav" className="relative lg:text-sm lg:leading-6 text-stone-700 dark:text-stone-300">
           <div className="h-screen space-y-2">
             <ul className="flex flex-col space-y-4">
               {navigation.map((item) => (

@@ -45,7 +45,7 @@ export default function Home() {
           THE RIO MAJOR
         </h1>
 
-        <p className="pb-6 mt-3 text-base text-center text-stone-600 sm:max-w-xl sm:mt-5 sm:text-lg md:mt-5 md:text-xl">
+        <p className="pb-6 mt-3 text-base text-center text-stone-600 dark:text-stone-200 sm:max-w-xl sm:mt-5 sm:text-lg md:mt-5 md:text-xl">
           Some examples of the Rio Major team and autograph stickers.{" "}
           <Link href="/search?q=rio%202022">
             <a className="text-indigo-400 duration-100 hover:text-indigo-500">
