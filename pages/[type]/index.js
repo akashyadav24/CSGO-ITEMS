@@ -67,13 +67,23 @@ export default function Skins() {
         lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
       const pageOffset = window.pageYOffset + window.innerHeight + 400;
 
-      console.log(pageOffset, lastItemLoadedOffset)
-
       if (pageOffset > lastItemLoadedOffset && loading === false) {
         setLoading(true);
         setSize(size + 1);
       }
     }
+  };
+
+  const formatName = (name) => {
+    return `${name.charAt(0).toUpperCase()}${name.slice(1).replace(/[-_]/g, " ")}`;
+  };
+
+  const pageTitle = () => {
+    if (type) {
+      return `${formatName(type)} - CSGO ITEMS`;
+    }
+
+    return "CSGO ITEMS";
   };
 
   if (mounted && !isValidType(type)) {
@@ -83,7 +93,7 @@ export default function Skins() {
   return (
     <>
       <Head>
-        <title>{type} - CSGO ITEMS</title>
+        <title>{pageTitle()}</title>
         <meta
           name="description"
           content={`List of ${type} items in CSGO ITEMS`}

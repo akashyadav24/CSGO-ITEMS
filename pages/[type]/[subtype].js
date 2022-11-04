@@ -73,6 +73,18 @@ export default function Skins() {
     }
   };
 
+  const formatName = (name) => {
+    return `${name.charAt(0).toUpperCase()}${name.slice(1).replace(/[-_]/g, " ")}`;
+  };
+
+  const pageTitle = () => {
+    if (type && subtype) {
+      return `${formatName(type)} / ${formatName(subtype)} - CSGO ITEMS`;
+    }
+
+    return "CSGO ITEMS";
+  };
+
   if (mounted && !isValidType(type, subtype)) {
     return <Custom404 />;
   }
@@ -80,9 +92,7 @@ export default function Skins() {
   return (
     <>
       <Head>
-        <title>
-          {type} / {subtype} - CSGO ITEMS
-        </title>
+        <title>{pageTitle()}</title>
         <meta
           name="description"
           content={`List of ${type} / ${subtype} items in CSGO ITEMS`}
