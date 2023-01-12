@@ -10,13 +10,13 @@
 
 @layer utilities {
   .items-grid {
-    @apply grid w-full py-10 mx-auto gap-y-10 gap-x-6;
+    @apply grid w-full pt-5 pb-10 mx-auto gap-y-10 gap-x-6;
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(95px, 1fr));
   }
 
   .items-grid-small {
-    @apply grid w-full py-10 mx-auto gap-y-10 gap-x-6;
+    @apply grid w-full pt-5 pb-10 mx-auto gap-y-10 gap-x-6;
     grid-template-columns: repeat(auto-fill, minmax(159px, 1fr));
     /* grid-template-rows: repeat(auto-fill, minmax(95px, 1fr)); */
   }

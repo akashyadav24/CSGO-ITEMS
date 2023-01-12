@@ -27,7 +27,7 @@ export default function ItemsFilter({ filter, filterOptions, search, setSearch }
   }, [wrapperRef]);
 
   return (
-    <div className="flex justify-end mt-10 -mb-5">
+    <div className="flex justify-end mt-10">
       <div className="relative flex max-w-md rounded-md">
         <div className="absolute inset-y-0 flex items-center left-2 text-slate-400">
           <svg
