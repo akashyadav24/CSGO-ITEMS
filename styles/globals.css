@@ -6,6 +6,11 @@
   body {
     @apply font-sans antialiased bg-stone-50 dark:bg-neutral-900;
   }
+
+  main:has(.background-grid) {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
 }
 
 @layer utilities {
@@ -72,5 +77,41 @@
     100% {
       stroke-dashoffset: -124px;
     }
+  }
+}
+
+@layer components {
+  /* Design copied from https://github.com/enjidev/enji.dev */
+  .background-grid {
+    @apply relative z-0 bg-slate-100;
+    @apply dark:bg-[#0c1222];
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .background-grid::before {
+    @apply bg-grid-slate-200/80 absolute inset-0 z-[-1] content-[''];
+    @apply dark:bg-grid-slate-50/[.025];
+
+    mask-image: linear-gradient(transparent, black, transparent);
+  }
+
+  .background-grid--fade-in {
+    @apply bg-transparent bg-gradient-to-t from-slate-100 via-slate-100;
+    @apply dark:bg-transparent dark:from-[#0c1222] dark:via-[#0c1222];
+  }
+
+  .background-grid--fade-in::before {
+    @apply bg-left-bottom;
+
+    mask-image: linear-gradient(transparent, black, black);
+  }
+
+  .background-grid--fade-out {
+    @apply bg-transparent bg-gradient-to-b from-slate-100 via-slate-100;
+    @apply dark:bg-transparent dark:from-[#0c1222] dark:via-[#0c1222];
+  }
+
+  .background-grid--fade-out::before {
+    mask-image: linear-gradient(black, black, transparent);
   }
 }
