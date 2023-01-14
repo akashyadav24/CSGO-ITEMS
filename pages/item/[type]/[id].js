@@ -54,7 +54,7 @@ export default function SkinById() {
           <div className="grid gap-10 mt-10 lg:grid-cols-7">
             <div
               className={
-                "flex lg:col-span-3 items-center justify-center w-full overflow-hidden bg-gray-200 dark:bg-neutral-800 rounded-md min-h-[20rem] lg:min-h-[40rem] group-hover:opacity-75 lg:h-80"
+                "flex lg:col-span-3 items-center justify-center w-full overflow-hidden bg-gray-200 dark:bg-slate-800 rounded-md min-h-[20rem] lg:min-h-[40rem] group-hover:opacity-75 lg:h-80"
               }
             >
               <div className="px-10 lg:px-20">
@@ -76,7 +76,7 @@ export default function SkinById() {
                 </p> */}
               </div>
               <div>
-                <p className="mt-1 text-base text-gray-700 dark:text-stone-400">
+                <p className="mt-1 text-base text-gray-700 dark:text-slate-400">
                   {item.description}
                 </p>
               </div>

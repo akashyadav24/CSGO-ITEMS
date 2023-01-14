@@ -69,7 +69,7 @@ export default function Navbar({ openPalette, togglePalette }) {
       <div
         className={classNames(
           isScrolled
-            ? "dark:bg-neutral-800 backdrop-blur  bg-stone-50/80 dark:bg-neutral-900/80 lg:border-b translate-y-0"
+            ? "dark:bg-slate-800 backdrop-blur  bg-stone-50/80 dark:bg-slate-900/80 lg:border-b translate-y-0"
             : "bg-transparent translate-y-2",
           " sticky top-0 z-40 flex-none w-full lg:z-50 duration-100 lg:border-stone-900/10"
         )}
