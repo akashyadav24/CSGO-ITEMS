@@ -4,7 +4,7 @@ import ItemCard from "../components/ItemCard";
 import ItemsFilter from "../components/ItemsFilter";
 import SpinnerLoader from "../components/SpinnerLoader";
 import { getAllItems } from "../services/csgo";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -44,7 +44,7 @@ function getItemColor(type) {
   return colors[type] || "bg-gray-300";
 }
 
-export default function Skins() {
+export default function Search() {
   const [loading, setLoading] = useState(false);
   const [skins, setSkins] = useState([]);
   const [showedItems, setShowedItems] = useState([]);
@@ -94,7 +94,7 @@ export default function Skins() {
   }, [q]);
 
   useEffect(() => {
-    history.replaceState({}, null, `/search?q=${search}`);
+    Router.replace(`/search?q=${search}`, `/search?q=${search}`, { shallow: true });
 
     setFilter("");
 
