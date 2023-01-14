@@ -100,6 +100,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
 
   useEffect(() => {
     function handleEnterKey(e) {
+      if (!openPalette) return;
       if (e.key === "Enter") {
         e.preventDefault();
         togglePalette(false);
