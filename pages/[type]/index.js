@@ -75,7 +75,9 @@ export default function Skins() {
   };
 
   const formatName = (name) => {
-    return `${name.charAt(0).toUpperCase()}${name.slice(1).replace(/[-_]/g, " ")}`;
+    return `${name.charAt(0).toUpperCase()}${name
+      .slice(1)
+      .replace(/[-_]/g, " ")}`;
   };
 
   const pageTitle = () => {
@@ -99,30 +101,35 @@ export default function Skins() {
           content={`List of ${type} items in CSGO ITEMS`}
         />
       </Head>
-      <ItemsFilter
-        filter={Constants.FILTER_OPTIONS_AVAILABLE[type]}
-        filterOptions={Constants.NAVIGATION[type]}
-        search={search}
-        setSearch={setSearch}
-      />
-      <SpinnerLoader loading={!data} />
-      <div className="items-grid-small sm:items-grid">
-        {data
-          ? data?.map((items, index) => {
-              return (
-                Array.isArray(items) &&
-                items.map((item) => (
-                  <ItemCard
-                    key={item.id}
-                    route={{ type: type, id: item.id }}
-                    name={item.name}
-                    image={item.image}
-                    rarity={item.rarity}
-                  ></ItemCard>
-                ))
-              );
-            })
-          : null}
+
+      <header className="absolute top-0 w-full h-64 background-grid background-grid--fade-out"></header>
+
+      <div className="px-4 mx-auto lg:px-8 max-w-7xl">
+        <ItemsFilter
+          filter={Constants.FILTER_OPTIONS_AVAILABLE[type]}
+          filterOptions={Constants.NAVIGATION[type]}
+          search={search}
+          setSearch={setSearch}
+        />
+        <SpinnerLoader loading={!data} />
+        <div className="items-grid-small sm:items-grid">
+          {data
+            ? data?.map((items, index) => {
+                return (
+                  Array.isArray(items) &&
+                  items.map((item) => (
+                    <ItemCard
+                      key={item.id}
+                      route={{ type: type, id: item.id }}
+                      name={item.name}
+                      image={item.image}
+                      rarity={item.rarity}
+                    ></ItemCard>
+                  ))
+                );
+              })
+            : null}
+        </div>
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import ResponsiveNavbar from "./ResponsiveNavbar";
+import useOnScroll from "../hooks/useOnScroll";
 
 const navigation = [
   { name: "Skins", href: "/skins" },
@@ -21,6 +22,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ openPalette, togglePalette }) {
+  const isScrolled = useOnScroll(0);
+
   const router = useRouter();
   const [showNavbar, setShowNavbar] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -63,14 +66,54 @@ export default function Navbar({ openPalette, togglePalette }) {
       {showNavbar && (
         <ResponsiveNavbar navigation={navigation} closeNavbar={setShowNavbar} />
       )}
-      <div className="sticky top-0 z-40 flex-none w-full bg-white dark:bg-neutral-800 backdrop-blur lg:z-50 lg:border-b lg:border-stone-900/10 bg-stone-50/90 dark:bg-neutral-900/90">
-        <div className="mx-auto max-w-7xl">
-          <div className="px-4 py-3 border-b border-stone-900/10 lg:px-8 lg:border-0">
+      <div
+        className={classNames(
+          isScrolled
+            ? "dark:bg-slate-800 backdrop-blur  bg-stone-50/80 dark:bg-slate-900/80 lg:border-b translate-y-0"
+            : "bg-transparent translate-y-2",
+          " sticky top-0 z-40 flex-none w-full lg:z-50 duration-100 lg:border-stone-900/10"
+        )}
+      >
+        <div className="mx-auto max-w-[120rem]">
+          <div
+            className={classNames(
+              isScrolled ? "border-b border-stone-900/10 lg:border-0" : "",
+              "px-4 py-3  lg:px-8"
+            )}
+          >
             <div className="relative flex items-center">
               <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
                 <Link href="/">
-                  <a>CSGO ITEMS</a>
+                  <a className="italic">CSGO ITEMS</a>
                 </Link>
+              </div>
+
+              <div className="relative items-center hidden ml-8 lg:flex">
+                <nav className="text-sm font-semibold leading-6 text-stone-700 dark:text-stone-300">
+                  <ul className="flex space-x-4 xl:space-x-5">
+                    {navigation.map((item) => (
+                      <li key={item.name}>
+                        <Link href={item.href}>
+                          <a
+                            className={classNames(
+                              router.asPath.startsWith(item.href)
+                                ? "text-indigo-400 bg-indigo-400/20 py-1 px-2 rounded-md"
+                                : "",
+                              "hover:text-indigo-500 duration-100"
+                            )}
+                            aria-current={
+                              router.asPath.startsWith(item.href)
+                                ? "page"
+                                : undefined
+                            }
+                          >
+                            {item.name}
+                          </a>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
               </div>
 
               <div className="relative flex ml-auto space-x-3 pointer-events-auto">
@@ -148,33 +191,6 @@ export default function Navbar({ openPalette, togglePalette }) {
                 </Link>
               </div>
 
-              <div className="relative items-center hidden ml-auto lg:flex">
-                <nav className="text-sm font-semibold leading-6 text-stone-700 dark:text-stone-300">
-                  <ul className="flex space-x-6 xl:space-x-8">
-                    {navigation.map((item) => (
-                      <li key={item.name}>
-                        <Link href={item.href}>
-                          <a
-                            className={classNames(
-                              router.asPath.startsWith(item.href)
-                                ? "text-indigo-400"
-                                : "",
-                              "hover:text-indigo-500 duration-100"
-                            )}
-                            aria-current={
-                              router.asPath.startsWith(item.href)
-                                ? "page"
-                                : undefined
-                            }
-                          >
-                            {item.name}
-                          </a>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
               <div className="flex gap-3">
                 <button
                   type="button"

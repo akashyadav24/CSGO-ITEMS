@@ -100,6 +100,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
 
   useEffect(() => {
     function handleEnterKey(e) {
+      if (!openPalette) return;
       if (e.key === "Enter") {
         e.preventDefault();
         togglePalette(false);
@@ -161,7 +162,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                 e.stopPropagation();
               }}
             >
-              <div className="relative w-full overflow-hidden bg-white rounded-md shadow-2xl dark:bg-neutral-800">
+              <div className="relative w-full overflow-hidden bg-white rounded-md shadow-2xl dark:bg-slate-800">
                 <div className="relative p-2">
                   <button
                     type="button"
@@ -200,7 +201,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                       }, 100);
                     }}
                     type="text"
-                    className="w-full p-2 bg-gray-100 rounded-md outline-none pl-9 dark:bg-neutral-900 dark:text-stone-200"
+                    className="w-full p-2 bg-gray-100 rounded-md outline-none pl-9 dark:bg-slate-900 dark:text-stone-200"
                     placeholder="Search..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -225,7 +226,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                       as={`/item/${getType(item.id)}/${item.id}`}
                     >
                       <a
-                        className="block w-full p-2 rounded-md hover:bg-gray-50 dark:hover:bg-neutral-900 focus:bg-gray-50 dark:focus:bg-neutral-900"
+                        className="block w-full p-2 rounded-md hover:bg-gray-50 dark:hover:bg-slate-900 focus:bg-gray-50 dark:focus:bg-slate-900"
                         onClick={() => leavePalette()}
                       >
                         <div className="flex items-center">
@@ -238,7 +239,7 @@ export default function CommandPalette({ openPalette, togglePalette }) {
                             <div className="text-sm font-bold dark:text-stone-50">
                               {item.name}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-stone-300">
+                            <div className="text-xs text-gray-500 dark:text-slate-300">
                               {item.rarity}
                             </div>
                           </div>
