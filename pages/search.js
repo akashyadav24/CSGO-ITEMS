@@ -94,7 +94,9 @@ export default function Search() {
   }, [q]);
 
   useEffect(() => {
-    Router.replace(`/search?q=${search}`, `/search?q=${search}`, { shallow: true });
+    Router.replace(`/search?q=${search}`, `/search?q=${search}`, {
+      shallow: true,
+    });
 
     setFilter("");
 
@@ -203,43 +205,49 @@ export default function Search() {
         </title>
         <meta name="description" content={`Results for '${q}' in CSGO ITEMS`} />
       </Head>
-      <ItemsFilter filter={false} search={search} setSearch={setSearch} />
 
-      {filterByType().length > 0 && (
-        <div className="pt-5 text-white select-none">
-          <div className="flex items-center gap-2 overflow-x-scroll sm:overflow-auto sm:flex-wrap hide-scrollbar">
-            {filterByType().map(([type, count], index) => (
-              <div
-                key={index}
-                className={classNames(
-                  getItemColor(type),
-                  (filter && filter !== type) && "opacity-30",
-                  "p-0.5 px-2 text-xs text-gray-900 rounded-full flex items-center gap-1 cursor-pointer flex-shrink-0"
-                )}
-                onClick={() => toggleType(type)}
-              >
-                <div className="">{type}</div>
-                <span>{count}</span>
-              </div>
-            ))}
+      <header className="absolute top-0 w-full h-64 background-grid background-grid--fade-out"></header>
+
+      <div className="relative z-10 px-4 mx-auto lg:px-8 max-w-7xl">
+        <ItemsFilter filter={false} search={search} setSearch={setSearch} />
+
+        {filterByType().length > 0 && (
+          <div className="pt-5 text-white select-none">
+            <div className="flex items-center gap-2 overflow-x-scroll sm:overflow-auto sm:flex-wrap hide-scrollbar">
+              {filterByType().map(([type, count], index) => (
+                <div
+                  key={index}
+                  className={classNames(
+                    getItemColor(type),
+                    filter && filter !== type && "opacity-30 hover:opacity-60",
+                    "p-0.5 px-2 text-xs text-gray-900 rounded-full flex items-center gap-1 cursor-pointer flex-shrink-0 transition ease-in-out delay-75"
+                  )}
+                  onClick={() => toggleType(type)}
+                >
+                  <div className="">{type}</div>
+                  <span>{count}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <SpinnerLoader loading={loading} />
-      <div className="items-grid-small sm:items-grid">
-        {showedItems.map((item) => {
-          return (
-            <ItemCard
-              key={item.id}
-              route={{ type: getType(item), id: item.id }}
-              name={item.name}
-              image={item.image}
-              rarity={item.rarity}
-              showTag={true}
-            ></ItemCard>
-          );
-        })}
+        <SpinnerLoader loading={loading} />
+
+        <div className="items-grid-small sm:items-grid">
+          {showedItems.map((item) => {
+            return (
+              <ItemCard
+                key={item.id}
+                route={{ type: getType(item), id: item.id }}
+                name={item.name}
+                image={item.image}
+                rarity={item.rarity}
+                showTag={true}
+              ></ItemCard>
+            );
+          })}
+        </div>
       </div>
     </>
   );
