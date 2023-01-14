@@ -44,36 +44,46 @@ export default function SkinById() {
         <title>{pageTitle()}</title>
         <meta name="description" content={pageDescription()} />
       </Head>
-      <SpinnerLoader loading={loading} />
-      {!loading && item !== null ? (
-        <div className="grid gap-10 mt-10 lg:grid-cols-7">
-          <div
-            className={
-              "flex lg:col-span-3 items-center justify-center w-full overflow-hidden bg-gray-200 dark:bg-neutral-800 rounded-md min-h-[20rem] lg:min-h-[40rem] group-hover:opacity-75 lg:h-80"
-            }
-          >
-            <div className="px-10 lg:px-20">
-              <img
-                src={item?.image}
-                alt={item?.name}
-                loading="lazy"
-                decode="async"
-              />
+
+      <header className="absolute top-0 w-full h-64 background-grid background-grid--fade-out"></header>
+
+      <div className="relative z-10 px-4 mx-auto lg:px-8 max-w-7xl">
+        <SpinnerLoader loading={loading} />
+        
+        {!loading && item !== null ? (
+          <div className="grid gap-10 mt-10 lg:grid-cols-7">
+            <div
+              className={
+                "flex lg:col-span-3 items-center justify-center w-full overflow-hidden bg-gray-200 dark:bg-neutral-800 rounded-md min-h-[20rem] lg:min-h-[40rem] group-hover:opacity-75 lg:h-80"
+              }
+            >
+              <div className="px-10 lg:px-20">
+                <img
+                  src={item?.image}
+                  alt={item?.name}
+                  loading="lazy"
+                  decode="async"
+                />
+              </div>
+            </div>
+            <div className="w-full lg:col-span-4">
+              <div className="mb-5">
+                <h1 className="text-2xl font-bold text-gray-800 dark:text-stone-50">
+                  {item.name}
+                </h1>
+                {/* <p className="mt-1 text-lg text-gray-700 dark:text-stone-400">
+                  {item.rarity ?? "unknown rarity"}
+                </p> */}
+              </div>
+              <div>
+                <p className="mt-1 text-base text-gray-700 dark:text-stone-400">
+                  {item.description}
+                </p>
+              </div>
             </div>
           </div>
-          <div className="w-full lg:col-span-4">
-            <div className="mb-5">
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-stone-50">{item.name}</h1>
-              <p className="mt-1 text-lg text-gray-700 dark:text-stone-400">
-                {item.rarity ?? "unknown rarity"}
-              </p>
-            </div>
-            <div>
-              <p className="mt-1 text-base text-gray-700 dark:text-stone-400">{item.description}</p>
-            </div>
-          </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </>
   );
 }
