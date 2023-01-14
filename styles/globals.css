@@ -90,7 +90,7 @@
 
   .background-grid::before {
     @apply bg-grid-slate-200/80 absolute inset-0 z-[-1] content-[''];
-    @apply dark:bg-grid-slate-50/[.025];
+    @apply dark:bg-grid-slate-50/[.030];
 
     mask-image: linear-gradient(transparent, black, transparent);
   }
