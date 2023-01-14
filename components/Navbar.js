@@ -97,7 +97,7 @@ export default function Navbar({ openPalette, togglePalette }) {
                           <a
                             className={classNames(
                               router.asPath.startsWith(item.href)
-                                ? "text-indigo-400"
+                                ? "text-indigo-400 bg-indigo-400/20 py-1 px-2 rounded-md"
                                 : "",
                               "hover:text-indigo-500 duration-100"
                             )}
