@@ -1,31 +1,31 @@
 export const BASE_URL = "https://bymykel.github.io/CSGO-API/api";
 
 export const URL = {
-  skins: "/api/skins",
-  crates: "/api/crates",
-  stickers: "/api/stickers",
-  collections: "/api/collections",
-  collectibles: "/api/collectibles",
-  agents: "/api/agents",
-  graffiti: "/api/graffiti",
-  keys: "/api/keys",
-  patches: "/api/patches",
-  "music-kits": "/api/music_kits",
+  skins: "/api/type/skins",
+  crates: "/api/type/crates",
+  stickers: "/api/type/stickers",
+  collections: "/api/type/collections",
+  collectibles: "/api/type/collectibles",
+  agents: "/api/type/agents",
+  graffiti: "/api/type/graffiti",
+  keys: "/api/ktype/eys",
+  patches: "/api/type/patches",
+  "music-kits": "/api/type/music_kits",
 };
 
 export const URL_SUBTYPE = {
-  "crates/cases": "/api/crates/cases",
-  "crates/capsules": "/api/crates/capsules",
-  "crates/graffiti": "/api/crates/graffiti",
-  "crates/music_kit_boxes": "/api/crates/music_kit_boxes",
-  "crates/souvenir": "/api/crates/souvenir",
-  "crates/other": "/api/crates/other",
-  "collectibles/major": "/api/collectibles/major",
-  "collectibles/operation": "/api/collectibles/operation",
-  "collectibles/map_coins": "/api/collectibles/map_coins",
-  "collectibles/pins": "/api/collectibles/pins",
-  "collectibles/service_medals": "/api/collectibles/service_medals",
-  "collectibles/other": "/api/collectibles/other",
+  "crates/cases": "/api/type/crates/cases",
+  "crates/capsules": "/api/type/crates/capsules",
+  "crates/graffiti": "/api/type/crates/graffiti",
+  "crates/music_kit_boxes": "/api/type/crates/music_kit_boxes",
+  "crates/souvenir": "/api/type/crates/souvenir",
+  "crates/other": "/api/type/crates/other",
+  "collectibles/major": "/api/type/collectibles/major",
+  "collectibles/operation": "/api/type/collectibles/operation",
+  "collectibles/map_coins": "/api/type/collectibles/map_coins",
+  "collectibles/pins": "/api/type/collectibles/pins",
+  "collectibles/service_medals": "/api/type/collectibles/service_medals",
+  "collectibles/other": "/api/type/collectibles/other",
 };
 
 export const NAVIGATION = {

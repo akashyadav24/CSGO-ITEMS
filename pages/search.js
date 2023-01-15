@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import ItemCard from "../components/ItemCard";
 import ItemsFilter from "../components/ItemsFilter";
 import SpinnerLoader from "../components/SpinnerLoader";
-import { getAllItems } from "../services/csgo";
 import Router, { useRouter } from "next/router";
+import axios from "axios";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -60,8 +60,7 @@ export default function Search() {
 
       try {
         setLoading(true);
-
-        const data = await getAllItems().then((res) => Object.values(res.data));
+        const data = await axios.get("/api/items").then((res) => Object.values(res.data));
 
         setSkins([...data]);
         setShowedItems(data.splice(0, 20));

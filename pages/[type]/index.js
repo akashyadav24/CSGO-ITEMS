@@ -31,7 +31,7 @@ export default function Skins() {
     if (previousPageData && !previousPageData.length) return null;
 
     return (
-      `${Constants.URL[type]}?page=${pageIndex + 1}` +
+      `/api/items?page=${pageIndex + 1}&type=${type}` +
       (search ? `&q=${search}` : "")
     );
   };

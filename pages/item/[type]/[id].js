@@ -3,7 +3,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import SpinnerLoader from "../../../components/SpinnerLoader";
-import { getAllItems } from "../../../services/csgo";
 import CustomChart from "../../../components/Chart";
 
 function classNames(...classes) {
@@ -121,9 +120,7 @@ export default function SkinById() {
 
   useEffect(() => {
     async function getData() {
-      const { data } = await getAllItems().catch((e) => {
-        return { data: {} };
-      });
+      const data = await axios.get("/api/items").then((res) => res.data);
       const selectedItem = data[id] || null;
 
       setItem(selectedItem);
@@ -136,18 +133,10 @@ export default function SkinById() {
     async function fetchPriceHistory() {
       try {
         let priceHistory = await axios
-          .get(`/api/price_history/${item.id}`, {
+          .get(`/api/price_history/`, {
             params: { name: item.name },
           })
-          .then((res) => {
-            return Object.values(res.data).map((item) => {
-              return {
-                time: new Date(parseInt(item.time)).toLocaleDateString(),
-                value: parseFloat(item.value.toFixed(2)),
-                volume: item.volume,
-              };
-            });
-          });
+          .then((r) => r.data);
 
         setPriceHistory(priceHistory);
       } catch (e) {
