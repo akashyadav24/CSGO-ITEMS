@@ -29,16 +29,16 @@ function getType(item) {
 
 function getItemColor(type) {
   const colors = {
-    skins: "bg-blue-300",
-    crates: "bg-teal-300",
-    stickers: "bg-green-300",
-    collections: "bg-orange-300",
-    collectibles: "bg-yellow-300",
-    agents: "bg-red-300",
-    graffiti: "bg-pink-300",
-    keys: "bg-yellow-300",
-    patches: "bg-indigo-300",
-    "music-kits": "bg-purple-300",
+    skins: "dark:bg-blue-300 bg-blue-300/50",
+    crates: "dark:bg-teal-300 bg-teal-300/50",
+    stickers: "dark:bg-green-300 bg-green-300/50",
+    collections: "dark:bg-orange-300 bg-orange-300/50",
+    collectibles: "dark:bg-yellow-300 bg-yellow-300/50",
+    agents: "dark:bg-red-300 bg-red-300/50",
+    graffiti: "dark:bg-pink-300 bg-pink-300/50",
+    keys: "dark:bg-yellow-300 bg-yellow-300/50",
+    patches: "dark:bg-indigo-300 bg-indigo-300/50",
+    "music-kits": "dark:bg-purple-300 bg-purple-300/50",
   };
 
   return colors[type] || "bg-gray-300";
