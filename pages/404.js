@@ -8,11 +8,11 @@ export default function Custom404() {
             404
           </h1>
         </div>
-        <div className="md:pl-4 md:ml-4 md:border-l border-stone-100">
-          <h1 className="mb-1 text-3xl font-bold md:text-5xl text-stone-900">
+        <div className="md:pl-4 md:ml-4">
+          <h1 className="mb-1 text-3xl font-bold md:text-5xl text-stone-900 dark:text-slate-200">
             Page Not Found
           </h1>
-          <p className="text-stone-500">
+          <p className="text-stone-500 dark:text-slate-500">
             Please check the URL in the address bar and try again.
           </p>
         </div>

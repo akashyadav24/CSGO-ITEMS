@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { getAllItems } from "../services/csgo";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const getType = (id) => {
   const types = {
@@ -53,9 +53,9 @@ export default function CommandPalette({ openPalette, togglePalette }) {
   useEffect(() => {
     async function getData() {
       try {
-        const { data } = await getAllItems();
+        const data = await axios.get("/api/items").then((res) => Object.values(res.data));
 
-        setItems(Object.values(data));
+        setItems(data);
       } catch (e) {
         setItems([]);
       }
