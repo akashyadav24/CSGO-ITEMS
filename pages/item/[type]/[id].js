@@ -25,7 +25,7 @@ export default function SkinById() {
       color: "bg-indigo-400/40 dark:bg-indigo-400 text-indigo-600 font-bold",
     },
     {
-      name: "Las 30 days",
+      name: "30d",
       value: "30d",
       color: "bg-indigo-400/40 dark:bg-indigo-400 text-indigo-600 font-bold",
     },
