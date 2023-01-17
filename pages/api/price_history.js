@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const priceHistoryArray = Object.values(priceHistory).map((item) => {
       return {
         time: new Date(parseInt(item.time)).toLocaleDateString(),
-        value: parseFloat(item.value.toFixed(2)) + " USD",
+        value: parseFloat(item.value.toFixed(2)),
         volume: item.volume,
       };
     });

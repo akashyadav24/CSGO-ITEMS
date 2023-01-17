@@ -88,6 +88,9 @@ export default function SkinById() {
       yaxis: {
         labels: {
           padding: 4,
+          formatter: function (value) {
+            return value + " $";
+          },  
         },
       },
       colors: ["#818cf8"],
