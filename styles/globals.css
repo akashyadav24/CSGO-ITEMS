@@ -115,3 +115,7 @@
     mask-image: linear-gradient(black, black, transparent);
   }
 }
+
+.apexcharts-tooltip-title {
+  text-align: center;
+}
