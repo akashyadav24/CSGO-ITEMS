@@ -47,31 +47,31 @@ export default function SkinById() {
         enabled: false,
       },
       fill: {
-        opacity: 0.5,
-        type: "solid",
+        opacity: [0.25, 1],
+        type: ['solid', 'solid']
       },
       stroke: {
-        width: 2,
+        width: [1, 2],
         lineCap: "round",
         curve: "smooth",
       },
       series: [
         {
+          type: 'area',
+          name: "Volume",
+          data: chartData.map((i) => i.volume),
+        },
+        {
           type: "line",
           name: "Price",
           data: chartData.map((i) => i.value),
-        },
-        // {
-        //   type: 'column',
-        //   name: "Volume",
-        //   data: columnSeries
-        // }
+        }
       ],
-      // tooltip: {
-      //   theme: 'dark'
-      // },
       grid: {
         strokeDashArray: 4,
+        padding: {
+          top: 10,
+        },  
       },
       xaxis: {
         labels: {
@@ -85,15 +85,32 @@ export default function SkinById() {
         },
         // type: "datetime",
       },
-      yaxis: {
-        labels: {
-          padding: 4,
-          formatter: function (value) {
-            return value + " $";
-          },  
+      yaxis: [
+        {
+          // opposite: true,
+          title: {
+            text: "Volume",
+          },
+          labels: {
+            padding: 4,
+            formatter: function (value) {
+              return parseFloat(value);
+            },  
+          },
         },
-      },
-      colors: ["#818cf8"],
+        {
+          title: {
+            text: "Price",
+          },
+          labels: {
+            padding: 4,
+            formatter: function (value) {
+              return value + " $";
+            },  
+          },
+        },
+      ],
+      colors: ["#fb7185", "#818cf8"],
       labels: chartData.map((i) => i.time),
       legend: {
         show: false,
