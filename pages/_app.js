@@ -1,20 +1,10 @@
 import CommandPalette from "../components/CommandPalette";
 import Navbar from "../components/Navbar";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
 
   return (
     <>

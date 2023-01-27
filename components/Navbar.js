@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 import useOnScroll from "../hooks/useOnScroll";
+import useTheme from "../hooks/useTheme";
 
 const navigation = [
   { name: "Skins", href: "/skins" },
@@ -23,32 +24,10 @@ function classNames(...classes) {
 
 export default function Navbar({ openPalette, togglePalette }) {
   const isScrolled = useOnScroll(0);
+  const { theme, toggleTheme } = useTheme();
 
   const router = useRouter();
   const [showNavbar, setShowNavbar] = useState(false);
-  const [theme, setTheme] = useState("light");
-
-  const toggleTheme = () => {
-    if (theme === "dark") {
-      setTheme("light");
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-    } else {
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-    }
-  };
-
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-
-    if (theme === "dark") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
 
   useEffect(() => {
     if (showNavbar) {
