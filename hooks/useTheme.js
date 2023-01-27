@@ -11,7 +11,6 @@ export default function useTheme() {
   // Set theme on page load
   useEffect(() => {
     const localTheme = localStorage.getItem("theme");
-    console.log(localTheme);
     setTheme(localTheme === "dark" ? "dark" : "light");
   }, []);
 
