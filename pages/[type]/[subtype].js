@@ -8,6 +8,7 @@ import ItemsFilter from "../../components/ItemsFilter";
 import SpinnerLoader from "../../components/SpinnerLoader";
 import Custom404 from "../404";
 import * as Constants from "../../utils/constants";
+import useHeadInfo from "../../hooks/useHeadInfo";
 
 const isValidType = (type, subtype) => {
   return Constants.URL_SUBTYPE[`${type}/${subtype}`] !== undefined;
@@ -73,19 +74,7 @@ export default function Skins() {
     }
   };
 
-  const formatName = (name) => {
-    return `${name.charAt(0).toUpperCase()}${name
-      .slice(1)
-      .replace(/[-_]/g, " ")}`;
-  };
-
-  const pageTitle = () => {
-    if (type && subtype) {
-      return `${formatName(type)} / ${formatName(subtype)} - CSGO ITEMS`;
-    }
-
-    return "CSGO ITEMS";
-  };
+  const { title, desc } = useHeadInfo({ type, subtype });
 
   if (mounted && !isValidType(type, subtype)) {
     return <Custom404 />;
@@ -94,11 +83,8 @@ export default function Skins() {
   return (
     <>
       <Head>
-        <title>{pageTitle()}</title>
-        <meta
-          name="description"
-          content={`List of ${type} / ${subtype} items in CSGO ITEMS`}
-        />
+        <title>{title}</title>
+        <meta name="description" content={desc} />
       </Head>
 
       <header className="absolute top-0 w-full h-64 background-grid background-grid--fade-out"></header>

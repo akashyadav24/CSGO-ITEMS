@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import SpinnerLoader from "../../../components/SpinnerLoader";
 import CustomChart from "../../../components/Chart";
+import useHeadInfo from "../../../hooks/useHeadInfo";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -17,6 +18,11 @@ export default function SkinById() {
   const [loading, setLoading] = useState(true);
   const [priceHistory, setPriceHistory] = useState(null);
   const [options, setOptions] = useState("30d");
+
+  const { title, desc } = useHeadInfo({
+    name: item?.name,
+    description: item?.description,
+  });
 
   const optionsList = [
     {
@@ -48,7 +54,7 @@ export default function SkinById() {
       },
       fill: {
         opacity: [0.25, 1],
-        type: ['solid', 'solid']
+        type: ["solid", "solid"],
       },
       stroke: {
         width: [1, 2],
@@ -57,7 +63,7 @@ export default function SkinById() {
       },
       series: [
         {
-          type: 'area',
+          type: "area",
           name: "Volume",
           data: chartData.map((i) => i.volume),
         },
@@ -65,13 +71,13 @@ export default function SkinById() {
           type: "line",
           name: "Price",
           data: chartData.map((i) => i.value),
-        }
+        },
       ],
       grid: {
         strokeDashArray: 4,
         padding: {
           top: 10,
-        },  
+        },
       },
       xaxis: {
         labels: {
@@ -95,7 +101,7 @@ export default function SkinById() {
             padding: 4,
             formatter: function (value) {
               return parseFloat(value);
-            },  
+            },
           },
         },
         {
@@ -106,7 +112,7 @@ export default function SkinById() {
             padding: 4,
             formatter: function (value) {
               return value + " $";
-            },  
+            },
           },
         },
       ],
@@ -169,23 +175,11 @@ export default function SkinById() {
     }
   }, [item]);
 
-  const pageTitle = () => {
-    if (item?.name) {
-      return `${item?.name} - CSGO ITEMS`;
-    }
-
-    return "CSGO ITEMS";
-  };
-
-  const pageDescription = () => {
-    return item?.description ?? "";
-  };
-
   return (
     <>
       <Head>
-        <title>{pageTitle()}</title>
-        <meta name="description" content={pageDescription()} />
+        <title>{title}</title>
+        <meta name="description" content={desc} />
       </Head>
 
       <header className="absolute top-0 w-full h-64 background-grid background-grid--fade-out"></header>
