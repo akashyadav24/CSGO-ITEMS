@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import ResponsiveNavbar from "./ResponsiveNavbar";
+import NavbarResponsive from "./NavbarResponsive";
 import useOnScroll from "../hooks/useOnScroll";
 import useTheme from "../hooks/useTheme";
 
@@ -43,7 +43,7 @@ export default function Navbar({ openPalette, togglePalette }) {
   return (
     <>
       {showNavbar && (
-        <ResponsiveNavbar navigation={navigation} closeNavbar={setShowNavbar} />
+        <NavbarResponsive navigation={navigation} closeNavbar={setShowNavbar} />
       )}
       <div
         className={classNames(

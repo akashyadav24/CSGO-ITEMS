@@ -5,7 +5,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ResponsiveNavbar({ navigation, closeNavbar }) {
+export default function NavbarResponsive({ navigation, closeNavbar }) {
   const router = useRouter();
 
   return (
