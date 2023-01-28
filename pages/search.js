@@ -5,6 +5,7 @@ import ItemsFilter from "../components/ItemsFilter";
 import SpinnerLoader from "../components/SpinnerLoader";
 import Router, { useRouter } from "next/router";
 import axios from "axios";
+import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -60,7 +61,9 @@ export default function Search() {
 
       try {
         setLoading(true);
-        const data = await axios.get("/api/items").then((res) => Object.values(res.data));
+        const data = await axios
+          .get("/api/items")
+          .then((res) => Object.values(res.data));
 
         setSkins([...data]);
         setShowedItems(data.splice(0, 20));
@@ -78,13 +81,6 @@ export default function Search() {
     }
     getData();
   }, [router.isReady]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
 
   useEffect(() => {
     if (q) {
@@ -120,25 +116,17 @@ export default function Search() {
     setShowedItems(filtered.splice(0, 20));
   }, [skins, search]);
 
-  const handleScroll = () => {
-    const lastItemLoaded =
-      document.querySelector(".items-grid > .group:last-child") ||
-      document.querySelector(".items-grid-small > .group:last-child");
-    if (lastItemLoaded) {
-      const lastItemLoadedOffset =
-        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
-      const pageOffset = window.pageYOffset + window.innerHeight;
-
-      if (pageOffset > lastItemLoadedOffset) {
-        if (filteredItems.length) {
-          const all = filteredItems;
-          const selected = all.splice(0, 20);
-          setShowedItems([...showedItems, ...selected]);
-          setFilteredItems(all);
-        }
+  const { isFetching, setIsFetching } =
+    useInfiniteScroll(() => {
+      if (filteredItems.length > 0) {
+        const all = filteredItems;
+        const selected = all.splice(0, 20);
+        setShowedItems([...showedItems, ...selected]);
+        setFilteredItems(all);
       }
-    }
-  };
+
+      setIsFetching(false);
+    });
 
   const filterByType = () => {
     const types = {};
@@ -209,7 +197,6 @@ export default function Search() {
 
       <div className="relative z-10 px-4 mx-auto lg:px-8 max-w-7xl">
         <ItemsFilter filter={false} search={search} setSearch={setSearch} />
-
         {filterByType().length > 0 && (
           <div className="pt-5 text-white select-none">
             <div className="flex items-center gap-2 overflow-x-scroll sm:overflow-auto sm:flex-wrap hide-scrollbar">
@@ -230,9 +217,6 @@ export default function Search() {
             </div>
           </div>
         )}
-
-        <SpinnerLoader loading={loading} />
-
         <div className="items-grid-small sm:items-grid">
           {showedItems.map((item) => {
             return (
@@ -247,6 +231,7 @@ export default function Search() {
             );
           })}
         </div>
+        <SpinnerLoader loading={isFetching} />
       </div>
     </>
   );

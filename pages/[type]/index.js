@@ -9,6 +9,7 @@ import SpinnerLoader from "../../components/SpinnerLoader";
 import Custom404 from "../404";
 import * as Constants from "../../utils/constants";
 import useHeadInfo from "../../hooks/useHeadInfo";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
 const isValidType = (type) => {
   return Constants.URL[type] !== undefined;
@@ -24,7 +25,6 @@ export default function Skins() {
   const { type } = router.query;
 
   const [mounted, setMounted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
 
   const getKey = (pageIndex, previousPageData) => {
@@ -37,7 +37,7 @@ export default function Skins() {
     );
   };
 
-  const { data, size, setSize } = useSWRInfinite(
+  const { data, size, setSize, isLoading } = useSWRInfinite(
     mounted ? getKey : null,
     fetcher,
     { revalidateFirstPage: false }
@@ -48,36 +48,18 @@ export default function Skins() {
     setSearch("");
   }, [type]);
 
+  const { isFetching, setIsFetching, setIsFinished } = useInfiniteScroll(() =>
+    setSize(size + 1)
+  );
+
   useEffect(() => {
-    setLoading(false);
+    if (data?.[data?.length - 1].length === 0) setIsFinished(true);
+    setIsFetching(false);
   }, [data]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-
-  const handleScroll = () => {
-    const lastItemLoaded =
-      document.querySelector(".items-grid > .group:last-child") ||
-      document.querySelector(".items-grid-small > .group:last-child");
-    if (lastItemLoaded) {
-      const lastItemLoadedOffset =
-        lastItemLoaded.offsetTop + lastItemLoaded.clientHeight;
-      const pageOffset = window.pageYOffset + window.innerHeight + 400;
-
-      if (pageOffset > lastItemLoadedOffset && loading === false) {
-        setLoading(true);
-        setSize(size + 1);
-      }
-    }
-  };
 
   const { title, desc } = useHeadInfo({ type });
 
-  if (mounted && !isValidType(type)) {
+  if (mounted && type && !isValidType(type)) {
     return <Custom404 />;
   }
 
@@ -97,7 +79,6 @@ export default function Skins() {
           search={search}
           setSearch={setSearch}
         />
-        <SpinnerLoader loading={!data} />
         <div className="items-grid-small sm:items-grid">
           {data
             ? data?.map((items, index) => {
@@ -116,6 +97,7 @@ export default function Skins() {
               })
             : null}
         </div>
+        <SpinnerLoader loading={isFetching} />
       </div>
     </>
   );
