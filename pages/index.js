@@ -58,20 +58,25 @@ export default function Home() {
 
       <div className="px-4 mx-auto lg:px-8 max-w-7xl">
         <div className="flex flex-col items-center pt-16">
-          <div className="items-grid-small sm:items-grid">
-            {data &&
-              data.map((item) => {
-                return (
-                  <ItemCard
-                    key={item.id}
-                    route={{ type: "stickers", id: item.id }}
-                    name={item.name}
-                    image={item.image}
-                    rarity={item.rarity}
-                  ></ItemCard>
-                );
-              })}
-          </div>
+            {data ?
+              <div className="items-grid-small sm:items-grid">
+                {data.map((item) => {
+                  return (
+                    <ItemCard
+                      key={item.id}
+                      route={{ type: "stickers", id: item.id }}
+                      name={item.name}
+                      image={item.image}
+                      rarity={item.rarity}
+                    ></ItemCard>
+                  );
+                })}
+              </div>
+              :
+              <h2 className="text-6xl italic font-bold text-center sm:max-w-3xl md:text-7xl bg-clip-text font-bold text-red-600">
+                "Item Not Found"
+              </h2>
+              }
         </div>
       </div>
     </>
